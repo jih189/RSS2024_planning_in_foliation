@@ -16,7 +16,14 @@ export default function Home() {
             <div className="py-4 border-t border-gray-200">
                 <Video/>
             </div>
+            <div className="py-4 border-t border-gray-200">
 
+                <RealWorldExperiments />
+            </div>
+            <div className="py-0.5 bg-gray-100">
+                <BibTeXDisplay/>
+                <Footer/>
+            </div>
         </div>
     );
 }
