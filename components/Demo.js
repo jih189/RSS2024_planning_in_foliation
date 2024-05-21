@@ -36,13 +36,13 @@ const Demo = () => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center mt-20">
+        <div className="flex flex-col items-center justify-center mt-12">
             <div className="flex">
                 {hasWindow && <ReactPlayer
                     ref={playerRef}
                     url="/demo.mp4"
-                    width="1280px"
-                    height="600px"
+                    width="800px"
+                    height="400px"
                     muted={true}
                     controls={false}
                     playing={playing}

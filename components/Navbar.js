@@ -3,7 +3,7 @@ import { FaFileAlt, FaArrowsAlt, FaVideo, FaCode } from 'react-icons/fa';
 
 const Navbar = () => {
     return (
-        <div className={`${styles.navContainer} flex justify-center space-x-6 mt-12`}>
+        <div className={`${styles.navContainer} flex justify-center space-x-6 mt-8`}>
             <a href="/paper" className={styles.btn}>
                 <FaFileAlt className={styles.icon} />Paper
             </a>

@@ -7,7 +7,7 @@
     background-color: #4A5568;
     color: white;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
     transition: background-color 0.3s, transform 0.2s;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -21,5 +21,5 @@
 
 .icon {
     margin-right: 10px;
-    font-size: 21px;
+    font-size: 20px;
 }
