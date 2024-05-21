@@ -1,0 +1,7 @@
+.transition-all {
+    transition: all 3s ease-in-out;
+}
+
+.min-h-0 {
+    min-height: 300px;
+}

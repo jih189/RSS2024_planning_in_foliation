@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import ReactPlayer from 'react-player';
 
-const VideoPlayer = () => {
+const Demo = () => {
     const [playing, setPlaying] = useState(false);
     const playerRef = useRef(null);
     const [hasWindow, setHasWindow] = useState(false);
@@ -23,11 +23,10 @@ const VideoPlayer = () => {
 
     const timeStamps = [
         { label: 'Concept of Foliation', time: 3 },
+        { label: 'FoliatedRepMap Construction', time: 23 },
         { label: 'FoliatedRepMap Updating', time: 77 },
-        { label: 'Limitation of FoliatedRepMap', time: 112 },
-        { label: 'Our Approach', time: 124 },
-        { label: 'Simulation Experiments', time: 149 },
-        { label: 'Real World Experiments', time: 421 }
+        { label: 'Sampling from Atlas', time: 110 },
+        { label: 'Experiments', time: 149 },
     ];
 
     const formatTime = (seconds) => {
@@ -71,4 +70,4 @@ const VideoPlayer = () => {
     );
 };
 
-export default VideoPlayer;
+export default Demo;
