@@ -1,10 +1,8 @@
 import React, {useState, useRef, useEffect, Suspense} from 'react';
 import ReactPlayer from 'react-player';
-import { Canvas, extend, useThree } from '@react-three/fiber';
+import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useGLTF } from '@react-three/drei';
-import { OrbitControls as OrbitControlsImpl } from 'three/examples/jsm/controls/OrbitControls';
 
-extend({ OrbitControlsImpl });
 function Model() {
     const { scene } = useGLTF('/seq.glb');
     return <primitive object={scene} scale={0.5} />;
@@ -49,24 +47,6 @@ const ProblemVisualization = () => {
         setCurrentRange(range);
     };
 
-    const orbitRef = useRef();
-
-    useEffect(() => {
-        setTimeout(() => {
-            const controls = orbitRef.current;
-            const handleOrbitChange = () => {
-                const target = controls.target;
-                console.log('OrbitControls target:', target.x, target.y, target.z);
-            };
-
-            controls.addEventListener('change', handleOrbitChange);
-
-            return () => {
-                controls.removeEventListener('change', handleOrbitChange);
-            };
-        }, 1000);
-    }, []);
-
     return (
         <div className="max-w-7xl mx-auto px-4 py-8 mt-4 text-left">
             <h2 className="text-5xl font-bold mb-3">Foliated Manifolds Problem</h2>
@@ -107,7 +87,7 @@ const ProblemVisualization = () => {
                         <Suspense fallback={null}>
                             <Model/>
                         </Suspense>
-                        <OrbitControls ref={orbitRef} target={[0, 0, 0.6]} enablePan={true} enableZoom={true}
+                        <OrbitControls target={[0, 0, 0.6]} enablePan={true} enableZoom={true}
                                        enableRotate={true}/>
                     </Canvas>
                 </div>

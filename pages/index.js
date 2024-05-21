@@ -17,7 +17,7 @@ export default function Home() {
                 <Video/>
             </div>
             <div className="py-4 border-t border-gray-200">
-
+                <ProblemVisualization />
                 <RealWorldExperiments />
             </div>
             <div className="py-0.5 bg-gray-100">
