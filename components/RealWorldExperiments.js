@@ -40,6 +40,8 @@ const RealWorldExperiments = () => {
         }
     };
 
+    const videoUrl = process.env.NEXT_PUBLIC_BASE_PATH ? `${process.env.NEXT_PUBLIC_BASE_PATH}/demo.mp4` : "/demo.mp4";
+
     return (
         <div className="max-w-7xl mx-auto px-4 py-8 mt-4 text-left">
             <h2 className="text-5xl font-bold mb-8">Real World Experiment</h2>
@@ -53,7 +55,7 @@ const RealWorldExperiments = () => {
             <div className="flex mt-8 justify-between">
                 {hasWindow && <ReactPlayer
                     ref={playerLeftRef}
-                    url="/demo.mp4"
+                    url={videoUrl}
                     width="49%"
                     height="auto"
                     muted={true}
@@ -65,7 +67,7 @@ const RealWorldExperiments = () => {
                 />}
                 {hasWindow && <ReactPlayer
                     ref={playerRightRef}
-                    url="/demo.mp4"
+                    url={videoUrl}
                     width="49%"
                     height="auto"
                     muted={true}

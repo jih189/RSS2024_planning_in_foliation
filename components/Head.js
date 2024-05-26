@@ -16,9 +16,9 @@ const PageHead = () => {
                         Repetition Roadmap</h1>
                     <p className="text-xl text-gray-700 mt-4">Robotics: Science and Systems (RSS) 2024</p>
                     <p className="text-md text-gray-600 mt-4">
-                        <a href="https://github.com/jih189" className="hover:underline">Jiaming Hu<sup>1*</sup></a>,
+                        <a href="https://jih189.github.io/" className="hover:underline">Jiaming Hu<sup>1*</sup></a>,
                         <span> </span>
-                        <a href="https://github.com/ShrutheeshIR" className="hover:underline">Shrutheesh Raman
+                        <a href="https://shrutheeshir.github.io/" className="hover:underline">Shrutheesh Raman
                             Iyer<sup>1,2*</sup></a>,
                         <span> </span>
                         <a href="https://jwjoel.com/" className="hover:underline">Jiawei Wang<sup>1</sup></a>,
@@ -29,7 +29,7 @@ const PageHead = () => {
                     <p className="text-sm text-gray-500 mt-1"><sup>1</sup>University of California, San
                         Diego, <sup>2</sup>Aurora Operations, Inc</p>
                     <Navbar/>
-                    <Demo/>
+
                 </div>
                 <div className="w-full h-14 bg-gradient-to-t from-gray-300 to-transparent absolute bottom-0 flex justify-center">
                     <FaChevronDown className="text-gray-400 text-2xl animate-bounce mt-6 opacity-60" />

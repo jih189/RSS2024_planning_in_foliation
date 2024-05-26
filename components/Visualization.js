@@ -47,6 +47,8 @@ const ProblemVisualization = () => {
         setCurrentRange(range);
     };
 
+    const videoUrl = process.env.NEXT_PUBLIC_BASE_PATH ? `${process.env.NEXT_PUBLIC_BASE_PATH}/demo.mp4` : "/demo.mp4";
+
     return (
         <div className="max-w-7xl mx-auto px-4 py-8 mt-4 text-left">
             <h2 className="text-5xl font-bold mb-3">Foliated Manifolds Problem</h2>
@@ -67,7 +69,7 @@ const ProblemVisualization = () => {
             <div className="flex mt-8 justify-between">
                 {hasWindow && <ReactPlayer
                     ref={playerRef}
-                    url="/demo.mp4"
+                    url={videoUrl}
                     width="49%"
                     height="350px"
                     muted={true}

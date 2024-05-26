@@ -16,6 +16,7 @@ const Demo = () => {
         setPlaying(true);
         if (playerRef.current) {
             setTimeout(() => {
+                setPlaying(true);
                 playerRef.current.seekTo(time, 'seconds');
             }, 100);
         }
@@ -35,12 +36,14 @@ const Demo = () => {
         return `${min}:${sec.toString().padStart(2, '0')}`;
     };
 
+    const videoUrl = process.env.NEXT_PUBLIC_BASE_PATH ? `${process.env.NEXT_PUBLIC_BASE_PATH}/demo.mp4` : "/demo.mp4";
+
     return (
         <div className="flex flex-col items-center justify-center mt-12">
             <div className="flex">
                 {hasWindow && <ReactPlayer
                     ref={playerRef}
-                    url="/demo.mp4"
+                    url={videoUrl}
                     width="800px"
                     height="400px"
                     muted={true}
@@ -51,6 +54,7 @@ const Demo = () => {
                     onPlay={() => setPlaying(true)}
                     onStart={() => {
                         setPlaying(true);
+                        playerRef.current.seekTo(20, 'seconds');
                     }}
                 />}
             </div>
