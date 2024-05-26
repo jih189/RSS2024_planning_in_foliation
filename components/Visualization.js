@@ -4,7 +4,12 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useGLTF } from '@react-three/drei';
 
 function Model() {
-    const { scene } = useGLTF('/seq.glb');
+
+    const getModelURL = (model) => {
+        return process.env.NEXT_PUBLIC_BASE_PATH ? `${process.env.NEXT_PUBLIC_BASE_PATH}/${model}` : `/${model}`;
+    }
+
+    const { scene } = useGLTF(getModelURL('/seq.glb'));
     return <primitive object={scene} scale={0.5} />;
 }
 
