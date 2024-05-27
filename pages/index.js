@@ -5,6 +5,7 @@ import Abstract from "../components/Abstract";
 import Video from "../components/Video";
 import RealWorldExperiments from "../components/RealWorldExperiments";
 import ProblemVisualization from "../components/Visualization";
+import Problems from "../components/Problems";
 
 export default function Home() {
     return (
@@ -17,6 +18,7 @@ export default function Home() {
                 <Video/>
             </div>
             <div className="py-4 border-t border-gray-200">
+                <Problems />
                 <ProblemVisualization />
                 <RealWorldExperiments />
             </div>

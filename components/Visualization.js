@@ -33,7 +33,6 @@ function Model({ modelName }) {
     }, [loadedScene]);
 
     if (error) {
-        console.error("Failed to load model:", error);
         return <div>Error loading model.</div>;
     }
 
@@ -51,7 +50,7 @@ const ProblemVisualization = () => {
         { label: 'Opening Door', id: 4, description: "For Opening Door, each green plane is defined by opening the door with a grasp.", videoRange: [244, 270], model: "cross.glb" },
         { label: 'Opening Drawer', id: 5, description: "For Opening Drawer, each green plane is defined by dragging the drawer with a grasp.", videoRange: [277, 310], model: "cross.glb" },
         { label: 'Navigating Maze', id: 6, description: "For Navigating Maze, each green plane is defined by sliding the cup with a grasp.", videoRange: [230, 241], model: "cross.glb" },
-        { label: 'Rearranging Shelf', id: 6, description: "For Rearranging Shelf, blue, green, and yellow planes are defined by sliding the cup at different levels; each red plane is defined by lifting or lowering the first column of the cup between different heights.", videoRange: [211, 228], model: "shelf_1.glb" },
+        { label: 'Rearranging Shelf', id: 7, description: "For Rearranging Shelf, blue, green, and yellow planes are defined by sliding the cup at different levels; each red plane is defined by lifting or lowering the first column of the cup between different heights.", videoRange: [211, 228], model: "shelf_1.glb" },
     ];
     const [currentRange, setCurrentRange] = useState(problems[0].videoRange);
     const [hasWindow, setHasWindow] = useState(false);
@@ -70,7 +69,6 @@ const ProblemVisualization = () => {
     const checkAndSeek = (playerRef, start) => {
         if (playerRef.current) {
             setTimeout(() => playerRef.current.seekTo(start), 100);
-            console.log("set to start")
         } else {
             setTimeout(() => checkAndSeek(playerRef, start), 500);
         }
@@ -101,7 +99,7 @@ const ProblemVisualization = () => {
     const videoUrl = process.env.NEXT_PUBLIC_BASE_PATH ? `${process.env.NEXT_PUBLIC_BASE_PATH}/demo.mp4` : "/demo.mp4";
 
     return (
-        <div className="max-w-7xl mx-auto px-4 py-8 mt-4 text-left">
+        <div className="max-w-7xl mx-auto px-4 py-8 text-left">
             <h2 className="text-5xl font-bold mb-3">Foliated Manifolds Problem</h2>
             <div className="flex flex-wrap justify-start mb-3">
                 {problems.map((item, index) => (
