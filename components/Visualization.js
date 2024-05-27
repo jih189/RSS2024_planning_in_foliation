@@ -2,26 +2,60 @@ import React, {useState, useRef, useEffect, Suspense} from 'react';
 import ReactPlayer from 'react-player';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useGLTF } from '@react-three/drei';
+import {MeshStandardMaterial} from "three";
 
-function Model() {
-
+function Model({ modelName }) {
     const getModelURL = (model) => {
         return process.env.NEXT_PUBLIC_BASE_PATH ? `${process.env.NEXT_PUBLIC_BASE_PATH}/${model}` : `/${model}`;
+    };
+
+    const [scene, setScene] = useState();
+    const { scene: loadedScene, error } = useGLTF(getModelURL(modelName));
+
+    useEffect(() => {
+        if (loadedScene) {
+            const newScene = loadedScene.clone();
+            newScene.traverse((child) => {
+                if (child.isMesh) {
+                    child.material = new MeshStandardMaterial({
+                        color: child.material.color,
+                        transparent: true,
+                        opacity: 0.85,
+                        emissive: child.material.color,
+                        emissiveIntensity: 0.05,
+                        roughness: 0.9,
+                        metalness: 0.1
+                    });
+                }
+            });
+            setScene(newScene);
+        }
+    }, [loadedScene]);
+
+    if (error) {
+        console.error("Failed to load model:", error);
+        return <div>Error loading model.</div>;
     }
 
-    const { scene } = useGLTF(getModelURL('/seq.glb'));
-    return <primitive object={scene} scale={0.5} />;
+    return scene ? <primitive object={scene} scale={0.8} /> : null;
 }
 
 const ProblemVisualization = () => {
     const [playing, setPlaying] = useState(true);
     const playerRef = useRef(null);
+    const [modelName, setModelName] = useState('simple_1.glb');
     const problems = [
-        { label: 'Sliding Cup', id: 1, description: "1", videoRange: [149, 157], model: "sc.obj" },
-        { label: 'Pouring Water', id: 2, description: "1", videoRange: [159, 198], model: "rs.obj" },
+        { label: 'Sliding Cup', id: 1, description: "For Sliding Cup, each green plane is defined by sliding the cup with a certain grasp.", videoRange: [149, 157], model: "simple_1.glb" },
+        { label: 'Pouring Water', id: 2, description: "For Pouring Water, horizontal planes with different colors are defined by the different stages of pouring water. For all subsequent tasks, each purple plane represents re-grasping at intermediate placements.", videoRange: [159, 198], model: "seq_2.glb" },
+        { label: 'Opening Bottle', id: 3, description: "For Opening Bottle, yellow and green planes are defined by rotating the lid with a certain grasp; each red plane is defined by the initial half of the rotation.", videoRange: [159, 198], model: "bottle.glb" },
+        { label: 'Opening Door', id: 4, description: "For Opening Door, each green plane is defined by opening the door with a grasp.", videoRange: [159, 198], model: "cross.glb" },
+        { label: 'Opening Drawer', id: 5, description: "For Opening Drawer, each green plane is defined by dragging the drawer with a grasp.", videoRange: [159, 198], model: "cross.glb" },
+        { label: 'Navigating Maze', id: 6, description: "For Navigating Maze, each green plane is defined by sliding the cup with a grasp.", videoRange: [159, 198], model: "cross.glb" },
+        { label: 'Rearranging Shelf', id: 6, description: "For Rearranging Shelf, Blue, green, and yellow planes are defined by sliding the cup at different levels; each red plane is defined by lifting or lowering the first column of the cup between different heights.", videoRange: [159, 198], model: "shelf_1.glb" },
     ];
     const [currentRange, setCurrentRange] = useState(problems[0].videoRange);
     const [hasWindow, setHasWindow] = useState(false);
+    const [description, setDescription] = useState(problems[0].description);
 
     useEffect(() => {
         if (typeof window !== "undefined") {
@@ -61,7 +95,12 @@ const ProblemVisualization = () => {
                 {problems.map((item, index) => (
                     <button
                         key={index}
-                        onClick={() => jumpTo(item.videoRange)}
+                        onClick={() => {
+                            jumpTo(item.videoRange)
+                            setModelName(item.model)
+                            setDescription(item.description)
+                        }
+                        }
                         className="bg-transparent text-gray-800 font-semibold py-2 px-4 m-2 hover:bg-gray-200 hover:text-gray-900 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-110"
                     >
                         {item.label}
@@ -69,7 +108,7 @@ const ProblemVisualization = () => {
                 ))}
             </div>
             <p className="text-lg text-gray-700 text-justify">
-                Each task with its abstract manifold structure. We group the tasks with a similar structure in the same color. Each plane represents an abstract manifold. In all tasks, the vertical planes represent the un-grasping manifolds, defined by placements, while the horizontal planes represent sliding/transporting manifolds, defined by grasp poses.
+                Each task with its abstract manifold structure. We group the tasks with a similar structure in the same color. Each plane represents an abstract manifold. In all tasks, the vertical planes represent the un-grasping manifolds, defined by placements, while the horizontal planes represent sliding/transporting manifolds, defined by grasp poses. {description}
             </p>
             <div className="flex mt-8 justify-between">
                 {hasWindow && <ReactPlayer
@@ -92,9 +131,9 @@ const ProblemVisualization = () => {
                         <pointLight position={[-10, -10, -10]} intensity={0.5} color="#ffffff"/>
                         <directionalLight position={[0, 10, 5]} intensity={0.5} color="#ffffff"/>
                         <Suspense fallback={null}>
-                            <Model/>
+                            <Model key={modelName} modelName={modelName}/>
                         </Suspense>
-                        <OrbitControls target={[0, 0, 0.6]} enablePan={true} enableZoom={true}
+                        <OrbitControls target={[0, 0, 0]} enablePan={true} enableZoom={true}
                                        enableRotate={true}/>
                     </Canvas>
                 </div>
