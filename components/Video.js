@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import ReactPlayer from 'react-player';
 
-const Demo = () => {
+const Video = () => {
     const [playing, setPlaying] = useState(false);
     const playerRef = useRef(null);
     const [hasWindow, setHasWindow] = useState(false);
@@ -74,4 +74,4 @@ const Demo = () => {
     );
 };
 
-export default Demo;
+export default Video;

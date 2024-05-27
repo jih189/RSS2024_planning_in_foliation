@@ -47,11 +47,11 @@ const ProblemVisualization = () => {
     const problems = [
         { label: 'Sliding Cup', id: 1, description: "For Sliding Cup, each green plane is defined by sliding the cup with a certain grasp.", videoRange: [149, 157], model: "simple_1.glb" },
         { label: 'Pouring Water', id: 2, description: "For Pouring Water, horizontal planes with different colors are defined by the different stages of pouring water. For all subsequent tasks, each purple plane represents re-grasping at intermediate placements.", videoRange: [159, 198], model: "seq_2.glb" },
-        { label: 'Opening Bottle', id: 3, description: "For Opening Bottle, yellow and green planes are defined by rotating the lid with a certain grasp; each red plane is defined by the initial half of the rotation.", videoRange: [159, 198], model: "bottle.glb" },
-        { label: 'Opening Door', id: 4, description: "For Opening Door, each green plane is defined by opening the door with a grasp.", videoRange: [159, 198], model: "cross.glb" },
-        { label: 'Opening Drawer', id: 5, description: "For Opening Drawer, each green plane is defined by dragging the drawer with a grasp.", videoRange: [159, 198], model: "cross.glb" },
-        { label: 'Navigating Maze', id: 6, description: "For Navigating Maze, each green plane is defined by sliding the cup with a grasp.", videoRange: [159, 198], model: "cross.glb" },
-        { label: 'Rearranging Shelf', id: 6, description: "For Rearranging Shelf, Blue, green, and yellow planes are defined by sliding the cup at different levels; each red plane is defined by lifting or lowering the first column of the cup between different heights.", videoRange: [159, 198], model: "shelf_1.glb" },
+        { label: 'Opening Bottle', id: 3, description: "For Opening Bottle, yellow and green planes are defined by rotating the lid with a certain grasp; each red plane is defined by the initial half of the rotation.", videoRange: [312, 410], model: "bottle.glb" },
+        { label: 'Opening Door', id: 4, description: "For Opening Door, each green plane is defined by opening the door with a grasp.", videoRange: [244, 270], model: "cross.glb" },
+        { label: 'Opening Drawer', id: 5, description: "For Opening Drawer, each green plane is defined by dragging the drawer with a grasp.", videoRange: [277, 310], model: "cross.glb" },
+        { label: 'Navigating Maze', id: 6, description: "For Navigating Maze, each green plane is defined by sliding the cup with a grasp.", videoRange: [230, 241], model: "cross.glb" },
+        { label: 'Rearranging Shelf', id: 6, description: "For Rearranging Shelf, Blue, green, and yellow planes are defined by sliding the cup at different levels; each red plane is defined by lifting or lowering the first column of the cup between different heights.", videoRange: [211, 228], model: "shelf_1.glb" },
     ];
     const [currentRange, setCurrentRange] = useState(problems[0].videoRange);
     const [hasWindow, setHasWindow] = useState(false);
@@ -96,10 +96,10 @@ const ProblemVisualization = () => {
                     <button
                         key={index}
                         onClick={() => {
-                            jumpTo(item.videoRange)
-                            setModelName(item.model)
-                            setDescription(item.description)
-                        }
+                                jumpTo(item.videoRange)
+                                setModelName(item.model)
+                                setDescription(item.description)
+                            }
                         }
                         className="bg-transparent text-gray-800 font-semibold py-2 px-4 m-2 hover:bg-gray-200 hover:text-gray-900 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-110"
                     >

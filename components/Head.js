@@ -1,17 +1,27 @@
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Navbar from "./Navbar";
 import Demo from "./Demo";
 import { FaChevronDown } from 'react-icons/fa';
+import Video from "./Video";
 
 const PageHead = () => {
+    const [showDemo, setShowDemo] = useState(false);
+
+    useEffect(() => {
+        setTimeout(() => {
+            setShowDemo(true);
+        }, 800);
+    }, []);
+
     return (
         <>
             <Head>
                 <title>Motion Planning in Foliated Manifolds using Repetition Roadmap</title>
             </Head>
             <div
-                className={`flex justify-center items-center bg-white min-h-screen max-h-screen transition-all duration-1000 ease-in-out`}>
-                <div className="text-center">
+                className={`flex justify-center items-center bg-white min-h-screen max-h-screen transition-all duration-500 ease-in-out`}>
+                <div className="text-center transition-all duration-500 ease-in-out" style={{ marginTop: showDemo ? '0' : '45vh' }}>
                     <h1 className="text-5xl font-bold text-gray-900">Motion Planning in Foliated Manifolds using
                         Repetition Roadmap</h1>
                     <p className="text-xl text-gray-700 mt-4">Robotics: Science and Systems (RSS) 2024</p>
@@ -29,7 +39,9 @@ const PageHead = () => {
                     <p className="text-sm text-gray-500 mt-1"><sup>1</sup>University of California, San
                         Diego, <sup>2</sup>Aurora Operations, Inc</p>
                     <Navbar/>
-
+                    <div className={`transition-opacity duration-500 ease-in-out ${showDemo ? 'opacity-100' : 'opacity-0'}`}>
+                        <Demo />
+                    </div>
                 </div>
                 <div className="w-full h-14 bg-gradient-to-t from-gray-300 to-transparent absolute bottom-0 flex justify-center">
                     <FaChevronDown className="text-gray-400 text-2xl animate-bounce mt-6 opacity-60" />
