@@ -46,12 +46,12 @@ const ProblemVisualization = () => {
     const [modelName, setModelName] = useState('simple_1.glb');
     const problems = [
         { label: 'Sliding Cup', id: 1, description: "For Sliding Cup, each green plane is defined by sliding the cup with a certain grasp.", videoRange: [149, 157], model: "simple_1.glb" },
-        { label: 'Pouring Water', id: 2, description: "For Pouring Water, horizontal planes with different colors are defined by the different stages of pouring water. For all subsequent tasks, each purple plane represents re-grasping at intermediate placements.", videoRange: [159, 198], model: "seq_2.glb" },
+        { label: 'Pouring Water', id: 2, description: "For Pouring Water, horizontal planes with yellow, blue, red and green are defined by the different stages of pouring water. For all subsequent tasks, each purple plane represents re-grasping at intermediate placements.", videoRange: [159, 198], model: "seq_2.glb" },
         { label: 'Opening Bottle', id: 3, description: "For Opening Bottle, yellow and green planes are defined by rotating the lid with a certain grasp; each red plane is defined by the initial half of the rotation.", videoRange: [312, 410], model: "bottle.glb" },
         { label: 'Opening Door', id: 4, description: "For Opening Door, each green plane is defined by opening the door with a grasp.", videoRange: [244, 270], model: "cross.glb" },
         { label: 'Opening Drawer', id: 5, description: "For Opening Drawer, each green plane is defined by dragging the drawer with a grasp.", videoRange: [277, 310], model: "cross.glb" },
         { label: 'Navigating Maze', id: 6, description: "For Navigating Maze, each green plane is defined by sliding the cup with a grasp.", videoRange: [230, 241], model: "cross.glb" },
-        { label: 'Rearranging Shelf', id: 6, description: "For Rearranging Shelf, Blue, green, and yellow planes are defined by sliding the cup at different levels; each red plane is defined by lifting or lowering the first column of the cup between different heights.", videoRange: [211, 228], model: "shelf_1.glb" },
+        { label: 'Rearranging Shelf', id: 6, description: "For Rearranging Shelf, blue, green, and yellow planes are defined by sliding the cup at different levels; each red plane is defined by lifting or lowering the first column of the cup between different heights.", videoRange: [211, 228], model: "shelf_1.glb" },
     ];
     const [currentRange, setCurrentRange] = useState(problems[0].videoRange);
     const [hasWindow, setHasWindow] = useState(false);
@@ -86,6 +86,18 @@ const ProblemVisualization = () => {
         setCurrentRange(range);
     };
 
+    const colorizeDescription = (desc) => {
+        const colors = {
+            purple: 'bg-purple-200',
+            green: 'bg-green-200',
+            red: 'bg-red-200',
+            yellow: 'bg-yellow-200',
+            blue: 'bg-blue-200'
+        };
+        const regex = new RegExp(`\\b(${Object.keys(colors).join('|')})\\b`, 'gi');
+        return desc.replace(regex, (match) => `<span class="${colors[match.toLowerCase()]}">${match}</span>`);
+    };
+
     const videoUrl = process.env.NEXT_PUBLIC_BASE_PATH ? `${process.env.NEXT_PUBLIC_BASE_PATH}/demo.mp4` : "/demo.mp4";
 
     return (
@@ -96,10 +108,10 @@ const ProblemVisualization = () => {
                     <button
                         key={index}
                         onClick={() => {
-                                jumpTo(item.videoRange)
-                                setModelName(item.model)
-                                setDescription(item.description)
-                            }
+                            jumpTo(item.videoRange)
+                            setModelName(item.model)
+                            setDescription(item.description)
+                        }
                         }
                         className="bg-transparent text-gray-800 font-semibold py-2 px-4 m-2 hover:bg-gray-200 hover:text-gray-900 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-110"
                     >
@@ -107,8 +119,7 @@ const ProblemVisualization = () => {
                     </button>
                 ))}
             </div>
-            <p className="text-lg text-gray-700 text-justify">
-                Each task with its abstract manifold structure. We group the tasks with a similar structure in the same color. Each plane represents an abstract manifold. In all tasks, the vertical planes represent the un-grasping manifolds, defined by placements, while the horizontal planes represent sliding/transporting manifolds, defined by grasp poses. {description}
+            <p className="text-lg text-gray-700 text-justify" dangerouslySetInnerHTML={{ __html: colorizeDescription("Each task is represented by an abstract manifold structure, grouped by color for similar tasks. Vertical planes indicate un-grasping manifolds defined by placements, while horizontal planes represent sliding/transporting manifolds defined by grasp poses. " + description) }}>
             </p>
             <div className="flex mt-8 justify-between">
                 {hasWindow && <ReactPlayer
