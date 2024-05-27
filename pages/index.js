@@ -14,10 +14,10 @@ export default function Home() {
             <div className="mt-8">
                 <Abstract/>
             </div>
-            <div className="py-4 border-t border-gray-200">
+            <div className="border-t border-gray-200">
                 <Video/>
             </div>
-            <div className="py-4 border-t border-gray-200">
+            <div className="border-t border-gray-200">
                 <Problems />
                 <ProblemVisualization />
                 <RealWorldExperiments />

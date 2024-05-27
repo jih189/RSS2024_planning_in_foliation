@@ -68,7 +68,7 @@ const Problems = () => {
         }
     };
 
-    const videoUrl = process.env.NEXT_PUBLIC_BASE_PATH ? `${process.env.NEXT_PUBLIC_BASE_PATH}/rss_all_probs.webm` : "/rss_all_probs.webm";
+    const videoUrl = process.env.NEXT_PUBLIC_BASE_PATH ? `${process.env.NEXT_PUBLIC_BASE_PATH}/all_probs.webm` : "/all_probs.webm";
 
     return (
         <div className="max-w-7xl mx-auto px-4 py-8 mt-8 text-center">

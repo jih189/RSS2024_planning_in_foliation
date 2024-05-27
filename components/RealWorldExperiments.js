@@ -43,8 +43,8 @@ const RealWorldExperiments = () => {
     const videoUrl = process.env.NEXT_PUBLIC_BASE_PATH ? `${process.env.NEXT_PUBLIC_BASE_PATH}/demo.mp4` : "/demo.mp4";
 
     return (
-        <div className="max-w-7xl mx-auto px-4 py-8 mt-4 text-left">
-            <h2 className="text-5xl font-bold mb-8">Real World Experiment</h2>
+        <div className="max-w-7xl mx-auto px-4 py-8 text-left">
+            <h2 className="text-5xl font-bold mb-4">Real World Experiment</h2>
             <p className="text-lg text-gray-700 text-justify">
                 To showcase the feasibility of our planner, we conducted
                 real-world tests using a Fetch Robot to perform two tasks: opening a drawer and pouring water. We assume
