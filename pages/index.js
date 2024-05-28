@@ -6,6 +6,7 @@ import Video from "../components/Video";
 import RealWorldExperiments from "../components/RealWorldExperiments";
 import ProblemVisualization from "../components/Visualization";
 import Problems from "../components/Problems";
+import Gallery from "../components/Gallery";
 
 export default function Home() {
     return (
@@ -18,9 +19,12 @@ export default function Home() {
                 <Video/>
             </div>
             <div className="border-t border-gray-200">
-                <Problems />
-                <ProblemVisualization />
-                <RealWorldExperiments />
+                <Gallery/>
+            </div>
+            <div className="border-t border-gray-200">
+                <Problems/>
+                <ProblemVisualization/>
+                <RealWorldExperiments/>
             </div>
             <div className="py-0.5 bg-gray-100">
                 <BibTeXDisplay/>
